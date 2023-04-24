@@ -1,7 +1,12 @@
-import logo from './logo.svg';
-import './App.css';
+import React, { useState } from "react";
+import logo from "./logo.svg";
+import "./App.css";
 
 function App() {
+  const [number, setNumber] = useState(null);
+  const [numberTwo, setNumberTwo] = useState(null);
+  const [result, setResult] = useState(null);
+
   return (
     <div className="App">
       <header className="App-header">
@@ -9,14 +14,43 @@ function App() {
         <p>
           Edit <code>src/App.js</code> and save to reload.
         </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
+        <input
+          value={number}
+          onChange={(e) => {
+            setNumber(e.target.value);
+          }}
+          type={"number"}
+          placeholder="enter a number"
+          data-test-id='number-one'
+        ></input>
+        <input
+          value={numberTwo}
+          onChange={(e) => {
+            setNumberTwo(e.target.value);
+          }}
+          type={"number"}
+          placeholder="enter a number"
+          data-test-id='number-two'
+        ></input>
+        <button
+          data-test-id='add-two-numbers'
+          onClick={() => {
+            setResult(parseInt(number) + parseInt(numberTwo));
+          }}
         >
-          Learn React
-        </a>
+          add two numbers
+        </button>
+        <p data-test-id='result-label'>{result ? result : 'Enter two numbers'}</p>
+        <button
+          data-test-id='reset-button'
+          onClick={() => {
+            setResult(null);
+            setNumber(null);
+            setNumberTwo(null);
+          }}
+        >
+          Reset
+        </button>
       </header>
     </div>
   );
